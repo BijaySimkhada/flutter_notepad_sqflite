@@ -59,7 +59,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
     //content
     String encodedContent = jsonEncode(controller.document.toDelta().toJson());
     DataBaseService db = DataBaseService();
-    db.createNote(NoteModel(widget.id, title, encodedContent, time, time));
+    db.createNote(NoteModel(widget.id, title, encodedContent, note.createdAt, time));
     ScaffoldMessenger.of(context)
         .showSnackBar(const SnackBar(content: Text('Content Saved')));
   }
@@ -69,7 +69,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Create Note',
+          'bee-Note-ify',
           style: TextStyle(color: Colors.white),
         ),
       ),
