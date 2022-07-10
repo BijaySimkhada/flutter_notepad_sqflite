@@ -11,7 +11,8 @@ class CreateNoteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QuillController controller = QuillController.basic();
-    //save note method
+
+    //save note Method
     _saveNote() {
       print('save note at ${DateTime.now()}');
       String title = '';
@@ -28,12 +29,12 @@ class CreateNoteScreen extends StatelessWidget {
       //content
       String encodedContent =
           jsonEncode(controller.document.toDelta().toJson());
-      // var decodedContent = jsonDecode(encodedContent);
-      // print(decodedContent.runtimeType);
+
       DataBaseService db = DataBaseService();
       db.createNote(
           NoteModel(UniqueKey().hashCode, title, encodedContent, time, time));
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Content Saved')));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Content Saved')));
     }
 
     return Scaffold(

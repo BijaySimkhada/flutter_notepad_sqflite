@@ -74,7 +74,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
         ),
       ),
       body: _loading
-          ? LinearProgressIndicator()
+          ? const LinearProgressIndicator()
           : Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
