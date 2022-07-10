@@ -27,7 +27,6 @@ class _SettingScreenState extends State<SettingScreen> with RouteAware {
     DataBaseService service = DataBaseService();
     int result = await service.deleteNote(widget.id);
     if (result == 1) {
-      print(result.runtimeType);
       Navigator.popUntil(context, ModalRoute.withName('/'));
     } else {
       ScaffoldMessenger.of(context)

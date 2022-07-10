@@ -40,6 +40,8 @@ dependencies:
   path_provider: ^2.0.11
   #flutter_quill: here
   flutter_quill: ^5.0.4
+  #pull to refresh: here
+  pull_to_refresh: ^2.0.0
 
 dev_dependencies:
   flutter_test:
