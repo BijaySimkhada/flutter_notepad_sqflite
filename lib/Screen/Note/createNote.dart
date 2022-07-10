@@ -24,17 +24,22 @@ class CreateNoteScreen extends StatelessWidget {
         title =
             '${controller.document.toPlainText().toString().substring(0, controller.document.length)}...';
       }
-      //createAt
-      String time = DateTime.now().toString();
-      //content
-      String encodedContent =
-          jsonEncode(controller.document.toDelta().toJson());
+      if (controller.document.toPlainText().toString().length > 1) {
+        // createAt
+        String time = DateTime.now().toString();
+        //content
+        String encodedContent =
+            jsonEncode(controller.document.toDelta().toJson());
 
-      DataBaseService db = DataBaseService();
-      db.createNote(
-          NoteModel(UniqueKey().hashCode, title, encodedContent, time, time));
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Content Saved')));
+        DataBaseService db = DataBaseService();
+        db.createNote(
+            NoteModel(UniqueKey().hashCode, title, encodedContent, time, time));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Content Saved')));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Insufficient Content')));
+      }
     }
 
     return Scaffold(
