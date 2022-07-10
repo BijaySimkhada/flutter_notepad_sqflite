@@ -1,5 +1,6 @@
 import 'package:bee_note_fy/Screen/Note/createNote.dart';
 import 'package:bee_note_fy/local_storage/service/NoteDatabaseService.dart';
+import 'package:bee_note_fy/routeHelper/Helper.dart';
 import 'package:flutter/material.dart';
 import 'Screen/List/ListNote.dart';
 
@@ -21,8 +22,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: ListNoteScreen(),
+      // home: ListNoteScreen(),
+      navigatorObservers: [Helper.routeObserver],
       routes: {
+        '/': (context) => ListNoteScreen(),
         '/create-note': (context) => CreateNoteScreen(),
       },
     );

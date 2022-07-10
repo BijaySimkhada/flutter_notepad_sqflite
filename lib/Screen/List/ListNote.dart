@@ -1,8 +1,10 @@
 import 'package:bee_note_fy/Screen/Note/editNote.dart';
+import 'package:bee_note_fy/Screen/Reminder/settingScreen.dart';
 import 'package:bee_note_fy/local_storage/service/NoteDatabaseService.dart';
 import 'package:flutter/material.dart';
 
 import '../../local_storage/model/NoteModel.dart';
+import '../../routeHelper/Helper.dart';
 
 class ListNoteScreen extends StatefulWidget {
   const ListNoteScreen({Key? key}) : super(key: key);
@@ -11,12 +13,21 @@ class ListNoteScreen extends StatefulWidget {
   State<ListNoteScreen> createState() => _ListNoteScreenState();
 }
 
-class _ListNoteScreenState extends State<ListNoteScreen> {
+class _ListNoteScreenState extends State<ListNoteScreen> with RouteAware {
   bool _isloading = true;
   List<NoteModel> _list = [];
 
   @override
+  void didPopNext() {
+    getList();
+    super.didPopNext();
+  }
+
+  @override
   initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      Helper.routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute);
+    });
     getList();
     Future.delayed(const Duration(seconds: 2), () {
       setState(() {
@@ -66,20 +77,34 @@ class _ListNoteScreenState extends State<ListNoteScreen> {
                       itemCount: _list.length,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          leading: const Icon(Icons.notes),
-                          title: Text(_list[index].title),
-                          subtitle:
-                              Text('Created At:${_list[index].createdAt}'),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        EditNoteScreen(_list[index].id)));
-                            // DataBaseService db = DataBaseService();
-                            // db.getNote(_list[index].id);
-                          },
+                        return Card(
+                          child: Container(
+                            height: 80,
+                            child: ListTile(
+                              leading: const Icon(Icons.notes),
+                              title: Text(_list[index].title),
+                              subtitle:
+                                  Text('Created At:${_list[index].createdAt}'),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            EditNoteScreen(_list[index].id)));
+                                // DataBaseService db = DataBaseService();
+                                // db.getNote(_list[index].id);
+                              },
+                              trailing: IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SettingScreen(_list[index].id)));
+                                },
+                                icon: const Icon(Icons.settings),
+                              ),
+                            ),
+                          ),
                         );
                       })),
       floatingActionButton: FloatingActionButton(

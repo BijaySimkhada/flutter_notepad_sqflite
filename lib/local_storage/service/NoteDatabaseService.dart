@@ -53,4 +53,10 @@ class DataBaseService {
         note[0]['updatedAt'] as String);
     return noteModel;
   }
+  
+  Future<int> deleteNote(int id) async{
+    final Database db = await initDB();
+    var result = await db.delete('notes', where: 'id = ?', whereArgs: [id]);
+    return result;
+  }
 }
