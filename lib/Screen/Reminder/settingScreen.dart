@@ -17,7 +17,7 @@ class _SettingScreenState extends State<SettingScreen> with RouteAware {
 
   @override
   initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Helper.routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute);
     });
     super.initState();

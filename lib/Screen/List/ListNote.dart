@@ -34,7 +34,7 @@ class _ListNoteScreenState extends State<ListNoteScreen> with RouteAware {
 
   @override
   initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Helper.routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute);
     });
     getList();
