@@ -49,44 +49,49 @@ class CreateNoteScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 2),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 45,
-              child: QuillToolbar.basic(
-                controller: controller,
-                toolbarIconSize: 23,
-                multiRowsDisplay: false,
-                showImageButton: false,
-                showRedo: false,
-                showUndo: false,
-                showVideoButton: false,
-                showAlignmentButtons: false,
-                showIndent: false,
-                showLink: false,
-                showColorButton: false,
-                showBackgroundColorButton: false,
-                showClearFormat: false,
-                showFontSize: false,
-                showStrikeThrough: false,
-                showCodeBlock: false,
-                showInlineCode: false,
+      body: QuillProvider(
+        configurations: QuillConfigurations(
+          controller: controller
+        ),
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 2),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 45,
+                child: QuillToolbar(configurations: QuillToolbarConfigurations(
+                    multiRowsDisplay: false,
+                    showRedo: false,
+                    showUndo: false,
+                    showAlignmentButtons: false,
+                    showIndent: false,
+                    showLink: false,
+                    showColorButton: false,
+                    showBackgroundColorButton: false,
+                    showClearFormat: false,
+                    showFontSize: false,
+                    showStrikeThrough: false,
+                    showCodeBlock: false,
+                    showInlineCode: false,
+                ),),
               ),
-            ),
-            const Divider(
-              thickness: 1,
-              color: Colors.black26,
-            ),
-            Expanded(
-                child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: QuillEditor.basic(controller: controller, readOnly: false),
-            ))
-          ],
+              const Divider(
+                thickness: 1,
+                color: Colors.black26,
+              ),
+              Expanded(
+                  child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: QuillEditor.basic(
+                  configurations: const QuillEditorConfigurations(
+                    readOnly: false
+                  ),
+                ),
+              ))
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(

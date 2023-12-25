@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '2.17.5'
+  sdk: '3.1.2'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -39,7 +39,7 @@ dependencies:
   #path_provider: here
   path_provider: ^2.0.11
   #flutter_quill: here
-  flutter_quill: ^5.0.4
+  flutter_quill: 8.0.0
   #pull to refresh: here
   pull_to_refresh: ^2.0.0
 

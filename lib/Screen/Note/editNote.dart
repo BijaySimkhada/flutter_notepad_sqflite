@@ -83,48 +83,56 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
       ),
       body: _loading
           ? const LinearProgressIndicator()
-          : Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 2),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 45,
-                    child: QuillToolbar.basic(
-                      controller: controller,
-                      toolbarIconSize: 23,
-                      multiRowsDisplay: false,
-                      showImageButton: false,
-                      showRedo: false,
-                      showUndo: false,
-                      showVideoButton: false,
-                      showAlignmentButtons: false,
-                      showIndent: false,
-                      showLink: false,
-                      showColorButton: false,
-                      showBackgroundColorButton: false,
-                      showClearFormat: false,
-                      showFontSize: false,
-                      showStrikeThrough: false,
-                      showCodeBlock: false,
-                      showInlineCode: false,
+          : QuillProvider(
+        configurations: QuillConfigurations(
+          controller: controller
+        ),
+            child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 2),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 45,
+                      child: QuillToolbar(
+                        configurations: QuillToolbarConfigurations(
+                            multiRowsDisplay: false,
+                            showRedo: false,
+                            showUndo: false,
+                            showAlignmentButtons: false,
+                            showIndent: false,
+                            showLink: false,
+                            showColorButton: false,
+                            showBackgroundColorButton: false,
+                            showClearFormat: false,
+                            showFontSize: false,
+                            showStrikeThrough: false,
+                            showCodeBlock: false,
+                            showInlineCode: false,
+                        ),
+                      ),
                     ),
-                  ),
-                  const Divider(
-                    thickness: 1,
-                    color: Colors.black26,
-                  ),
-                  Expanded(
-                      child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
-                    child: QuillEditor.basic(
-                        controller: controller, readOnly: false),
-                  ))
-                ],
+                    const Divider(
+                      thickness: 1,
+                      color: Colors.black26,
+                    ),
+                    Expanded(
+                        child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      child: QuillEditor(
+                        configurations: const QuillEditorConfigurations(),
+                        focusNode: FocusNode(),
+                        scrollController: ScrollController(),
+                      ),
+                      // child: QuillEditor.basic(
+                      //     controller: controller, readOnly: false),
+                    ))
+                  ],
+                ),
               ),
-            ),
+          ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: _saveNote,
           label: const Text(
